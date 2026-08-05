@@ -74,7 +74,7 @@
 
         input, select {
             width: 100%; padding: 13px 12px; border: 1px solid var(--border); background: #0f172a;
-            color: white; border-radius: 8px; box-sizing: border-box; font-size: 16px; /* evita zoom automático en iOS */
+            color: white; border-radius: 8px; box-sizing: border-box; font-size: 16px;
             touch-action: manipulation;
         }
         input:focus, select:focus { border-color: var(--accent); outline: none; }
@@ -387,11 +387,7 @@
 </div>
 
 <script>
-    /* =====================================================================
-       CAPA DE BASE DE DATOS (IndexedDB)
-       Reemplaza a localStorage: soporta muchos más datos (fotos incluidas),
-       funciona offline en el teléfono y es más robusta para uso diario.
-    ===================================================================== */
+    /* CAPA DE BASE DE DATOS (IndexedDB) */
     const DB_NAME = 'BarberiaLitoDB';
     const DB_VERSION = 1;
     const STORE_REGISTROS = 'registros';
@@ -449,8 +445,6 @@
     let guardando = false;
     let guardarPendiente = false;
     async function guardar() {
-        // Renderiza de inmediato desde memoria para que la interfaz se sienta rápida,
-        // y persiste en IndexedDB en segundo plano.
         render();
         if (guardando) { guardarPendiente = true; return; }
         guardando = true;
@@ -486,9 +480,7 @@
         }
     }
 
-    /* =====================================================================
-       ESTADO DE LA APLICACIÓN (en memoria, sincronizado con IndexedDB)
-    ===================================================================== */
+    /* ESTADO DE LA APLICACIÓN */
     let registros = [];
     let clientesBD = [];
 
@@ -510,7 +502,6 @@
         document.getElementById('horaSeleccionada').value = `${pad(ahora.getHours())}:${pad(ahora.getMinutes())}`;
     }
 
-    /* OBTENER ARRAY DE FOTOS DEL CLIENTE (MANTIENE COMPATIBILIDAD CON REGISTROS VIEJOS) */
     function obtenerFotosCliente(clienteNombre) {
         if (!clienteNombre) return [];
         const cli = clientesBD.find(c => c && c.nombre && c.nombre.toLowerCase() === clienteNombre.toLowerCase());
@@ -525,7 +516,6 @@
         return fotosArr;
     }
 
-    /* VISOR GALERÍA MULTIFOTOS */
     function abrirGaleriaCliente(nombreCliente) {
         clienteNombreGaleriaActual = nombreCliente;
         const fotos = obtenerFotosCliente(nombreCliente);
@@ -575,7 +565,6 @@
         document.getElementById('modalGaleriaFotos').style.display = 'none';
     }
 
-    /* DESCARGAR BASE DE DATOS JSON */
     function descargarBaseDeDatosJSON() {
         if (registros.length === 0 && clientesBD.length === 0) {
             alert('Aún no hay datos para descargar.');
@@ -603,7 +592,6 @@
         URL.revokeObjectURL(url);
     }
 
-    /* RESTAURAR BASE DE DATOS DESDE UN ARCHIVO JSON DE RESPALDO */
     function restaurarBaseDeDatosJSON(event) {
         const file = event.target.files[0];
         if (!file) return;
@@ -638,7 +626,6 @@
         reader.readAsText(file);
     }
 
-    /* CAPTURA Y ASIGNACIÓN DE FOTO A LA GALERÍA DEL CLIENTE */
     function capturarFotoCorte(idRegistro) {
         idRegistroFotoActual = idRegistro;
         document.getElementById('inputFotoPostServicio').click();
@@ -686,7 +673,7 @@
 
                     if (cliIndex >= 0) {
                         let fotosExistentes = obtenerFotosCliente(nombreCli);
-                        fotosExistentes.unshift(fotoBase64); // Agrega la foto al inicio del historial
+                        fotosExistentes.unshift(fotoBase64);
                         clientesBD[cliIndex].fotos = fotosExistentes;
                         clientesBD[cliIndex].foto = fotoBase64;
                     }
@@ -701,7 +688,6 @@
         reader.readAsDataURL(file);
     }
 
-    /* MODAL AGENDA */
     function abrirModalAgenda() {
         document.getElementById('modalAgenda').style.display = 'flex';
         document.getElementById('buscarClienteModal').value = '';
@@ -873,7 +859,7 @@
         }
 
         const nuevoRegistro = {
-            id: Date.now() + Math.floor(Math.random() * 1000), // evita colisiones si se guarda rápido
+            id: Date.now() + Math.floor(Math.random() * 1000),
             nombre: nombre,
             telefono: telefono,
             foto: fotoExistente,
@@ -946,16 +932,8 @@
         }
     }
 
-    /* ENVIAR WHATSAPP DE FORMA SEGURA Y CORREGIDA */
-
-    // Código de país que se asume cuando el cliente guardó el teléfono SIN código de país.
-    // Cámbialo si tu barbería no está en Venezuela (ej. '1' para EE.UU./Rep. Dominicana, '57' para Colombia, etc.)
     const CODIGO_PAIS_DEFECTO = '58';
 
-    // Normaliza números venezolanos típicos:
-    //  - "04121234567" (11 dígitos, empieza con 0)      -> "584121234567"
-    //  - "4121234567"  (10 dígitos, sin 0 ni código)     -> "584121234567"
-    //  - "584121234567" (ya trae código de país)         -> se deja igual
     function normalizarTelefono(telefono) {
         let digitos = telefono ? telefono.replace(/[^0-9]/g, '') : '';
         if (!digitos) return '';
@@ -972,27 +950,19 @@
         const telNormalizado = normalizarTelefono(telefono);
 
         if (telefono && telNormalizado.length < 11) {
-            if (!confirm('⚠️ El número de teléfono parece incompleto o con un formato raro, así que WhatsApp podría no abrir el chat correcto.\n\n¿Deseas intentarlo de todas formas?')) {
+            if (!confirm('⚠️ El número de teléfono parece incompleto, por lo que WhatsApp podría no abrir el chat correcto.\n\n¿Deseas intentarlo de todas formas?')) {
                 return;
             }
         }
 
-        // api.whatsapp.com/send es más directo que wa.me: en computadora evita
-        // la pantalla intermedia "Continuar al chat" y abre WhatsApp Web una sola vez.
         let url = telNormalizado
             ? `https://api.whatsapp.com/send?phone=${telNormalizado}&text=${encodeURIComponent(texto)}`
             : `https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`;
 
         const nuevaVentana = window.open(url, '_blank');
 
-        // Algunos navegadores/PWAs bloquean window.open; si pasa, navega en la misma pestaña.
         if (!nuevaVentana || nuevaVentana.closed || typeof nuevaVentana.closed === 'undefined') {
             window.location.href = url;
-        }
-
-        if (!telefono) {
-            // Aviso silencioso en consola; no interrumpe el flujo con un alert extra.
-            console.info('Se abrió WhatsApp sin un número específico: deberás elegir el contacto manualmente.');
         }
     }
 
@@ -1005,7 +975,6 @@
         abrirWhatsAppMensaje(telefonoCliente, texto);
     }
 
-    // Datos de Pago Móvil de la barbería. Edita estos valores si cambian.
     const DATOS_PAGO_MOVIL = {
         cedula: '29.727.652',
         banco: 'B.N.C. (0191)',
@@ -1020,15 +989,12 @@
         const fechaFormateada = `${fechaObj.toLocaleDateString()} ${fechaObj.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
 
         let detallePago = '';
-        let hayQuePagar = false;
         if (r.estadoPago === 'Pagado') {
             detallePago = `✅ *PAGO COMPLETO (100%)*`;
         } else if (r.estadoPago === 'Abono') {
             detallePago = `🟡 *ABONADO:* $${r.abono.toFixed(2)}\n📌 *RESTA POR PAGAR:* $${(r.monto - r.abono).toFixed(2)}`;
-            hayQuePagar = true;
         } else {
             detallePago = `❌ *PENDIENTE DE PAGO*`;
-            hayQuePagar = true;
         }
 
         let texto = `*LITO BARBER STUDIO* ✂️\n`;
@@ -1038,15 +1004,11 @@
         texto += `📅 *Fecha:* ${fechaFormateada}\n`;
         texto += `💰 *Precio Servicio:* $${r.monto.toFixed(2)}\n`;
         texto += `${detallePago}\n`;
-
-        if (hayQuePagar) {
-            texto += `--------------------------------\n`;
-            texto += `📲 *DATOS DE PAGO MÓVIL*\n`;
-            texto += `🪪 C.I.: ${DATOS_PAGO_MOVIL.cedula}\n`;
-            texto += `🏦 Banco: ${DATOS_PAGO_MOVIL.banco}\n`;
-            texto += `📞 Teléfono: ${DATOS_PAGO_MOVIL.telefono}\n`;
-        }
-
+        texto += `--------------------------------\n`;
+        texto += `📲 *DATOS DE PAGO MÓVIL*\n`;
+        texto += `🪪 C.I.: ${DATOS_PAGO_MOVIL.cedula}\n`;
+        texto += `🏦 Banco: ${DATOS_PAGO_MOVIL.banco}\n`;
+        texto += `📞 Teléfono: ${DATOS_PAGO_MOVIL.telefono}\n`;
         texto += `--------------------------------\n`;
         texto += `¡Gracias por tu preferencia! 🙌`;
 
@@ -1404,18 +1366,7 @@
         });
     }
 
-    // REGISTRO DEL SERVICE WORKER PARA HABILITAR PWA Y USO OFFLINE EN EL TELÉFONO
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js')
-                .then(reg => console.log('Service Worker registrado con éxito', reg))
-                .catch(err => console.log('Error al registrar Service Worker', err));
-        });
-    }
-
-    /* =====================================================================
-       INICIALIZACIÓN DE LA APP
-    ===================================================================== */
+    /* INICIALIZACIÓN DE LA APP */
     async function iniciarApp() {
         try {
             await abrirDB();
