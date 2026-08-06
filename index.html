@@ -213,9 +213,7 @@
                 <label>Frecuencia de Visita</label>
                 <div class="form-frecuencia-selector">
                     <button type="button" class="btn-form-frecuencia" id="btnFreq7" onclick="seleccionarFrecuenciaFormulario(7)">Semanal</button>
-                    <button type="button" class="btn-form-frecuencia active" id="btnFreq14" onclick="seleccionarFrecuenciaFormulario(14)">2 Sem.</button>
-                    <button type="button" class="btn-form-frecuencia" id="btnFreq21" onclick="seleccionarFrecuenciaFormulario(21)">3 Sem.</button>
-                    <button type="button" class="btn-form-frecuencia" id="btnFreq30" onclick="seleccionarFrecuenciaFormulario(30)">Mensual</button>
+                    <button type="button" class="btn-form-frecuencia active" id="btnFreq14" onclick="seleccionarFrecuenciaFormulario(14)">2 Semanas</button>
                 </div>
             </div>
         </div>
@@ -421,7 +419,7 @@
             } catch (err) {
                 console.error(err);
                 alert('❌ No se pudo leer el archivo. Asegúrate de que sea un archivo .json válido de respaldo.');
-            } final {
+            } finally {
                 document.getElementById('inputRestaurarBackup').value = '';
             }
         };
@@ -521,7 +519,7 @@
         URL.revokeObjectURL(url);
     }
 
-    /* CAPTURA Y ASIGNACIÓN DE FOTO A LA GALERÍA DEL CLIENTE */
+    /* CAPTURA, MARCA DE AGUA (FECHA Y HORA) Y ASIGNACIÓN DE FOTO */
     function capturarFotoCorte(idRegistro) {
         idRegistroFotoActual = idRegistro;
         document.getElementById('inputFotoPostServicio').click();
@@ -537,7 +535,7 @@
             img.onload = function() {
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
-                const maxDim = 350;
+                const maxDim = 600;
 
                 let width = img.width;
                 let height = img.height;
@@ -558,7 +556,32 @@
                 canvas.height = height;
                 ctx.drawImage(img, 0, 0, width, height);
 
-                const fotoBase64 = canvas.toDataURL('image/jpeg', 0.75);
+                // MARCA DE AGUA DE FECHA Y HORA
+                const ahora = new Date();
+                const pad = (n) => String(n).padStart(2, '0');
+                const fechaTexto = `${pad(ahora.getDate())}/${pad(ahora.getMonth() + 1)}/${ahora.getFullYear()} ${pad(ahora.getHours())}:${pad(ahora.getMinutes())}`;
+
+                const fontSize = Math.max(14, Math.floor(width / 25));
+                ctx.font = `bold ${fontSize}px sans-serif`;
+
+                const padding = 8;
+                const textWidth = ctx.measureText(fechaTexto).width;
+                const boxWidth = textWidth + padding * 2;
+                const boxHeight = fontSize + padding * 2;
+                const xPos = width - boxWidth - 10;
+                const yPos = height - boxHeight - 10;
+
+                ctx.fillStyle = 'rgba(15, 23, 42, 0.75)';
+                ctx.fillRect(xPos, yPos, boxWidth, boxHeight);
+
+                ctx.strokeStyle = '#3b82f6';
+                ctx.lineWidth = 1;
+                ctx.strokeRect(xPos, yPos, boxWidth, boxHeight);
+
+                ctx.fillStyle = '#ffffff';
+                ctx.fillText(fechaTexto, xPos + padding, yPos + boxHeight - padding - 2);
+
+                const fotoBase64 = canvas.toDataURL('image/jpeg', 0.80);
 
                 const regIndex = registros.findIndex(r => r.id === idRegistroFotoActual);
                 if (regIndex >= 0) {
@@ -657,7 +680,7 @@
 
     function seleccionarFrecuenciaFormulario(dias) {
         frecuenciaSeleccionadaForm = parseInt(dias);
-        [7, 14, 21, 30].forEach(d => {
+        [7, 14].forEach(d => {
             const btn = document.getElementById(`btnFreq${d}`);
             if (btn) {
                 btn.classList.toggle('active', d === frecuenciaSeleccionadaForm);
@@ -817,7 +840,7 @@
 
     function eliminar(id) {
         if(confirm('¿Deseas eliminar este registro?')) {
-            registros = registros.filter(r => r.id !== id);
+            registros = registros.filter(r => r !== null && r.id !== id);
             guardar();
         }
     }
@@ -846,7 +869,7 @@
     }
 
     function enviarReciboWhatsApp(id) {
-        const r = registros.find(item => item.id === id);
+        const r = registros.find(item => item && item.id === id);
         if (!r) return;
 
         const fechaObj = new Date(r.fechaISO);
@@ -883,8 +906,8 @@
         let atendidos = 0;
 
         registrosFiltrados.forEach(r => {
-            if (r.atendido) atendidos++;
-            totalRecaudado += (r.abono || 0);
+            if (r && r.atendido) atendidos++;
+            if (r) totalRecaudado += (r.abono || 0);
         });
 
         let titulo = fechaFiltroSeleccionada ? `REPORTE DEL DÍA (${fechaFiltroSeleccionada})` : `REPORTE GENERAL DE CITAS`;
