@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lito Barber Studio - Control de Citas & Clientes</title>
+    <title>Diamond Estudio, Barberia y Peluquería - Control de Citas & Clientes</title>
 
     <!-- CONFIGURACIÓN PWA DIRECTA CON MANIFEST EN LÍNEA -->
     <link rel="manifest" href='data:application/manifest+json,{
-        "name": "Lito Barber Studio",
-        "short_name": "Lito Barber",
+        "name": "Diamond Estudio, Barberia y Peluquería",
+        "short_name": "Diamond",
         "start_url": "./index.html",
         "display": "standalone",
         "background_color": "#0f172a",
         "theme_color": "#0f172a",
         "icons": [
             {
-                "src": "logo.jpg",
+                "src": "logo.png",
                 "sizes": "192x192 512x512",
-                "type": "image/jpeg"
+                "type": "image/png"
             }
         ]
     }'>
 
-    <link rel="apple-touch-icon" href="logo.jpg">
-    <link rel="icon" type="image/jpeg" href="logo.jpg">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="icon" type="image/png" href="logo.png">
     
     <meta name="theme-color" content="#0f172a">
     <meta name="mobile-web-app-capable" content="yes">
@@ -183,11 +183,91 @@
     <!-- LOGO Y TITULO -->
     <div class="header-container">
         <div class="logo-box">
-            <img src="logo.jpg" alt="Lito Barber Studio" style="max-width: 100%; height: auto; border-radius: 8px;" onerror="this.style.display='none'; document.getElementById('logoSvgFallback').style.display='block';">
-            <svg id="logoSvgFallback" viewBox="0 0 300 120" style="display:none; width:100%; height:auto; background:black; border-radius:8px; padding:10px;">
-                <text x="15" y="80" font-family="'Brush Script MT', cursive, sans-serif" font-size="75" font-weight="bold" fill="white" font-style="italic">lito</text>
-                <text x="175" y="52" font-family="'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="bold" fill="white" letter-spacing="2">BARBER</text>
-                <text x="175" y="78" font-family="'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="bold" fill="white" letter-spacing="2">STUDIO</text>
+            <img src="logo.png" alt="Diamond Estudio, Barberia y Peluquería" style="max-width: 100%; height: auto; border-radius: 50%;" onerror="this.style.display='none'; document.getElementById('logoSvgFallback').style.display='block';">
+            <svg id="logoSvgFallback" viewBox="0 0 500 500" style="display:none; width:100%; height:auto;">
+                <defs>
+                    <linearGradient id="goldGradFallback" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#b37d33"/>
+                        <stop offset="25%" stop-color="#f3e096"/>
+                        <stop offset="50%" stop-color="#d4af37"/>
+                        <stop offset="75%" stop-color="#f3e096"/>
+                        <stop offset="100%" stop-color="#a6722e"/>
+                    </linearGradient>
+
+                    <linearGradient id="diaTopLeftFb" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#e0f7fa"/>
+                        <stop offset="100%" stop-color="#80deea"/>
+                    </linearGradient>
+                    <linearGradient id="diaTopMidFb" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="100%" stop-color="#b2ebf2"/>
+                    </linearGradient>
+                    <linearGradient id="diaTopRightFb" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#80deea"/>
+                        <stop offset="100%" stop-color="#4dd0e1"/>
+                    </linearGradient>
+                    <linearGradient id="diaBottomLeftFb" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#4dd0e1"/>
+                        <stop offset="100%" stop-color="#00acc1"/>
+                    </linearGradient>
+                    <linearGradient id="diaBottomMidLeftFb" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#e0f7fa"/>
+                        <stop offset="100%" stop-color="#26c6da"/>
+                    </linearGradient>
+                    <linearGradient id="diaBottomMidRightFb" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#00acc1"/>
+                        <stop offset="100%" stop-color="#00838f"/>
+                    </linearGradient>
+                    <linearGradient id="diaBottomRightFb" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#26c6da"/>
+                        <stop offset="100%" stop-color="#006064"/>
+                    </linearGradient>
+                </defs>
+
+                <circle cx="250" cy="250" r="230" fill="#000000"/>
+
+                <g id="diamanteFb" transform="translate(0, 5)">
+                    <polygon points="175,155 210,155 190,185 140,185" fill="url(#diaTopLeftFb)" stroke="#ffffff" stroke-width="0.5"/>
+                    <polygon points="210,155 290,155 310,185 190,185" fill="url(#diaTopMidFb)" stroke="#ffffff" stroke-width="0.5"/>
+                    <polygon points="290,155 325,155 360,185 310,185" fill="url(#diaTopRightFb)" stroke="#ffffff" stroke-width="0.5"/>
+                    <polygon points="175,155 140,185 130,185" fill="#b2ebf2" stroke="#ffffff" stroke-width="0.5"/>
+                    <polygon points="325,155 370,185 360,185" fill="#4dd0e1" stroke="#ffffff" stroke-width="0.5"/>
+
+                    <polygon points="130,185 190,185 250,290" fill="url(#diaBottomLeftFb)" stroke="#ffffff" stroke-width="0.5"/>
+                    <polygon points="190,185 250,185 250,290" fill="url(#diaBottomMidLeftFb)" stroke="#ffffff" stroke-width="0.5"/>
+                    <polygon points="250,185 310,185 250,290" fill="url(#diaBottomMidRightFb)" stroke="#ffffff" stroke-width="0.5"/>
+                    <polygon points="310,185 370,185 250,290" fill="url(#diaBottomRightFb)" stroke="#ffffff" stroke-width="0.5"/>
+                </g>
+
+                <g id="coronaFb">
+                    <path d="M 170 158 Q 250 168 330 158 L 333 148 Q 250 158 167 148 Z" fill="url(#goldGradFallback)"/>
+                    <rect x="172" y="152" width="156" height="4" rx="2" fill="#fff5c0" opacity="0.8"/>
+
+                    <path d="M 250 80 L 238 120 L 244 148 L 256 148 L 262 120 Z" fill="url(#goldGradFallback)"/>
+                    <circle cx="250" cy="76" r="7" fill="url(#goldGradFallback)"/>
+                    <circle cx="250" cy="76" r="4" fill="#ff4081"/>
+
+                    <path d="M 205 95 L 198 126 L 208 150 L 222 150 L 216 126 Z" fill="url(#goldGradFallback)"/>
+                    <circle cx="205" cy="91" r="5.5" fill="url(#goldGradFallback)"/>
+                    <circle cx="205" cy="91" r="3" fill="#e040fb"/>
+
+                    <path d="M 295 95 L 284 126 L 278 150 L 292 150 L 302 126 Z" fill="url(#goldGradFallback)"/>
+                    <circle cx="295" cy="91" r="5.5" fill="url(#goldGradFallback)"/>
+                    <circle cx="295" cy="91" r="3" fill="#e040fb"/>
+
+                    <path d="M 165 115 L 168 135 L 176 150 L 188 150 L 180 132 Z" fill="url(#goldGradFallback)"/>
+                    <circle cx="165" cy="111" r="4.5" fill="url(#goldGradFallback)"/>
+                    <circle cx="165" cy="111" r="2.5" fill="#ffffff"/>
+
+                    <path d="M 335 115 L 320 132 L 312 150 L 324 150 L 332 135 Z" fill="url(#goldGradFallback)"/>
+                    <circle cx="335" cy="111" r="4.5" fill="url(#goldGradFallback)"/>
+                    <circle cx="335" cy="111" r="2.5" fill="#ffffff"/>
+
+                    <path d="M 175 148 Q 190 125 205 148 Q 227 120 250 148 Q 273 120 295 148 Q 310 125 325 148" fill="none" stroke="url(#goldGradFallback)" stroke-width="3"/>
+                </g>
+
+                <text x="250" y="358" font-family="'Times New Roman', Times, 'Cinzel', serif" font-size="44" font-weight="bold" fill="#ffffff" text-anchor="middle" letter-spacing="4">DIAMOND</text>
+                <text x="250" y="398" font-family="'Brush Script MT', 'Dancing Script', cursive" font-size="25" fill="url(#goldGradFallback)" text-anchor="middle">Estudio, Barberia y Peluquería</text>
             </svg>
         </div>
         <p>Gestión de Citas y Clientes</p>
@@ -406,7 +486,7 @@
                 const nuevosRegistros = Array.isArray(datos.registros) ? datos.registros : [];
 
                 if (nuevosClientes.length === 0 && nuevosRegistros.length === 0) {
-                    alert('El archivo no contiene datos reconocibles de un respaldo de Lito Barber Studio.');
+                    alert('El archivo no contiene datos reconocibles de un respaldo de Diamond Estudio, Barberia y Peluquería.');
                     return;
                 }
 
@@ -502,7 +582,7 @@
 
         const datosBackup = {
             fechaRespaldo: new Date().toISOString(),
-            barberia: "Lito Barber Studio",
+            barberia: "Diamond Estudio, Barberia y Peluquería",
             clientes: clientesBD,
             registros: registros
         };
@@ -514,7 +594,7 @@
         const fechaHoy = new Date().toISOString().split('T')[0];
         const a = document.createElement('a');
         a.href = url;
-        a.download = `Barberia_Lito_Backup_${fechaHoy}.json`;
+        a.download = `Barberia_Diamond_Backup_${fechaHoy}.json`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -869,7 +949,7 @@
 
     function enviarSeguimientoWhatsApp(nombreCliente, telefonoCliente, diasSinVenir) {
         let texto = `¡Hola ${nombreCliente}! 👋✂️\n\n`;
-        texto += `Te saludamos de *LITO BARBER STUDIO*. Notamos que han pasado *${diasSinVenir} días* desde tu último corte con nosotros.\n\n`;
+        texto += `Te saludamos de *DIAMOND ESTUDIO, BARBERIA Y PELUQUERÍA*. Notamos que han pasado *${diasSinVenir} días* desde tu último corte con nosotros.\n\n`;
         texto += `¿Te gustaría agendar tu cita para estos días y mantener tu estilo al día? 💈🔥\n\n`;
         texto += `¡Escríbenos y te apartamos tu turno!`;
 
@@ -892,7 +972,7 @@
             detallePago = `❌ *PENDIENTE DE PAGO*`;
         }
 
-        let texto = `*LITO BARBER STUDIO* ✂️\n`;
+        let texto = `*DIAMOND ESTUDIO, BARBERIA Y PELUQUERÍA* ✂️\n`;
         texto += `--------------------------------\n`;
         texto += `📄 *RECIBO DE SERVICIO*\n\n`;
         texto += `👤 *Cliente:* ${r.nombre}\n`;
@@ -920,7 +1000,7 @@
 
         let titulo = fechaFiltroSeleccionada ? `REPORTE DEL DÍA (${fechaFiltroSeleccionada})` : `REPORTE GENERAL DE CITAS`;
 
-        let texto = `📊 *LITO BARBER STUDIO* 📊\n`;
+        let texto = `📊 *DIAMOND ESTUDIO, BARBERIA Y PELUQUERÍA* 📊\n`;
         texto += `*${titulo}*\n`;
         texto += `--------------------------------\n`;
         texto += `✂️ *Atenciones Atendidas:* ${atendidos}\n`;
@@ -955,7 +1035,7 @@
         const encodedUri = encodeURI(csvContent);
         const link = document.createElement("a");
         link.setAttribute("href", encodedUri);
-        link.setAttribute("download", `Clientes_LitoBarberStudio_${new Date().toISOString().split('T')[0]}.csv`);
+        link.setAttribute("download", `Clientes_DiamondBarberStudio_${new Date().toISOString().split('T')[0]}.csv`);
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
