@@ -82,6 +82,7 @@
         .btn-walkin { background: #0d9488; flex: 1; }
         .btn-ws { background: #15803d; color: white; border: none; font-size: 0.75rem; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-weight: bold; display: inline-flex; align-items: center; gap: 4px; }
         .btn-foto-corte { background: #475569; color: white; border: none; font-size: 0.75rem; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-weight: bold; display: inline-flex; align-items: center; gap: 4px; }
+        .btn-foto-galeria { background: #334155; color: #cbd5e1; border: 1px solid var(--border); font-size: 0.75rem; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-weight: bold; display: inline-flex; align-items: center; gap: 4px; }
         .btn-export { background: #0284c7; color: white; font-size: 0.75rem; padding: 6px 10px; border-radius: 6px; font-weight: bold; border: none; cursor: pointer; }
         .btn-backup { background: #7c3aed; color: white; font-size: 0.75rem; padding: 6px 10px; border-radius: 6px; font-weight: bold; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
         .btn-restore { background: #b45309; color: white; font-size: 0.75rem; padding: 6px 10px; border-radius: 6px; font-weight: bold; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
@@ -174,8 +175,9 @@
 <body>
 
 <div class="container">
-    <!-- INPUTS OCULTOS PARA CAMARA Y RESTAURAR BACKUP -->
+    <!-- INPUTS OCULTOS PARA CAMARA, GALERÍA Y RESTAURAR BACKUP -->
     <input type="file" id="inputFotoPostServicio" accept="image/*" capture="environment" style="display: none;" onchange="guardarFotoCorteDirecto(event)">
+    <input type="file" id="inputFotoGaleria" accept="image/*" style="display: none;" onchange="guardarFotoCorteDirecto(event)">
     <input type="file" id="inputRestaurarBackup" accept="application/json" style="display: none;" onchange="restaurarBaseDeDatosJSON(event)">
 
     <!-- LOGO Y TITULO -->
@@ -525,6 +527,11 @@
         document.getElementById('inputFotoPostServicio').click();
     }
 
+    function adjuntarFotoGaleria(idRegistro) {
+        idRegistroFotoActual = idRegistro;
+        document.getElementById('inputFotoGaleria').click();
+    }
+
     function guardarFotoCorteDirecto(event) {
         const file = event.target.files[0];
         if (!file || !idRegistroFotoActual) return;
@@ -600,6 +607,7 @@
 
                 idRegistroFotoActual = null;
                 document.getElementById('inputFotoPostServicio').value = '';
+                document.getElementById('inputFotoGaleria').value = '';
                 guardar();
             };
             img.src = e.target.result;
@@ -1231,6 +1239,7 @@
                             <span class="tag ${r.tipo === 'Agendado' ? 'tag-agendado' : 'tag-walkin'}">${r.tipo}</span>
                             <button class="btn-ws" onclick="enviarReciboWhatsApp(${r.id})">💬 Recibo</button>
                             <button class="btn-foto-corte" onclick="capturarFotoCorte(${r.id})">📷 Foto Corte</button>
+                            <button class="btn-foto-galeria" onclick="adjuntarFotoGaleria(${r.id})">🖼️ Adjuntar Foto</button>
                         </div>
                     </div>
                 </div>
