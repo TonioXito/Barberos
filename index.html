@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lito Barber Studio - Control de Citas & Clientes</title>
 
     <!-- CONFIGURACIÓN PWA DIRECTA CON MANIFEST EN LÍNEA -->
@@ -24,7 +24,7 @@
 
     <link rel="apple-touch-icon" href="logo.jpg">
     <link rel="icon" type="image/jpeg" href="logo.jpg">
-
+    
     <meta name="theme-color" content="#0f172a">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -43,24 +43,10 @@
             --text-muted: #94a3b8;
             --border: #334155;
             --whatsapp: #25d366;
-            --safe-top: env(safe-area-inset-top, 0px);
-            --safe-bottom: env(safe-area-inset-bottom, 0px);
         }
-        * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
-        html { overscroll-behavior-y: contain; }
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            background: var(--bg);
-            margin: 0;
-            padding: calc(15px + var(--safe-top)) 15px calc(15px + var(--safe-bottom)) 15px;
-            color: var(--text);
-            overscroll-behavior-y: contain;
-            -webkit-user-select: none;
-            user-select: none;
-        }
-        input, textarea { -webkit-user-select: text; user-select: text; }
+        body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); margin: 0; padding: 15px; color: var(--text); }
         .container { max-width: 600px; margin: 0 auto; }
-
+        
         .header-container { text-align: center; margin-bottom: 25px; }
         .logo-box { width: 100%; max-width: 260px; margin: 0 auto 10px auto; display: flex; justify-content: center; align-items: center; }
         .header-container p { margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
@@ -69,16 +55,12 @@
         h2 { margin-top: 0; font-size: 1.1rem; color: var(--text); border-bottom: 1px solid var(--border); padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
         .form-group { margin-bottom: 12px; }
         .form-row { display: flex; gap: 10px; }
-        .form-row .form-group { flex: 1; min-width: 0; }
+        .form-row .form-group { flex: 1; }
         label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; color: var(--text-muted); }
-
-        input, select {
-            width: 100%; padding: 13px 12px; border: 1px solid var(--border); background: #0f172a;
-            color: white; border-radius: 8px; box-sizing: border-box; font-size: 16px;
-            touch-action: manipulation;
-        }
+        
+        input, select { width: 100%; padding: 12px; border: 1px solid var(--border); background: #0f172a; color: white; border-radius: 8px; box-sizing: border-box; font-size: 0.95rem; }
         input:focus, select:focus { border-color: var(--accent); outline: none; }
-
+        
         .input-destacado {
             background-color: #0f172a !important;
             color: #ffffff !important;
@@ -92,36 +74,31 @@
             filter: invert(1);
             cursor: pointer;
             opacity: 0.9;
-            padding: 6px;
         }
 
         .btn-group { display: flex; gap: 10px; margin-top: 15px; }
-        button {
-            padding: 13px 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;
-            color: white; transition: 0.2s; touch-action: manipulation; min-height: 44px;
-            font-family: inherit;
-        }
-        button:active { transform: scale(0.97); }
+        button { padding: 12px 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; transition: 0.2s; }
         .btn-primary { background: var(--accent); flex: 1; }
         .btn-walkin { background: #0d9488; flex: 1; }
-        .btn-ws { background: #15803d; color: white; border: none; font-size: 0.75rem; padding: 8px 10px; border-radius: 6px; cursor: pointer; font-weight: bold; display: inline-flex; align-items: center; gap: 4px; min-height: 36px; }
-        .btn-foto-corte { background: #475569; color: white; border: none; font-size: 0.75rem; padding: 8px 10px; border-radius: 6px; cursor: pointer; font-weight: bold; display: inline-flex; align-items: center; gap: 4px; min-height: 36px; }
-        .btn-export { background: #0284c7; color: white; font-size: 0.75rem; padding: 8px 10px; border-radius: 6px; font-weight: bold; border: none; cursor: pointer; min-height: 36px; }
-        .btn-backup { background: #7c3aed; color: white; font-size: 0.75rem; padding: 8px 10px; border-radius: 6px; font-weight: bold; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; min-height: 36px; }
-        .btn-restore { background: #b45309; color: white; font-size: 0.75rem; padding: 8px 10px; border-radius: 6px; font-weight: bold; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; min-height: 36px; }
-
-        .btn-agenda-header { background: #3b82f6; color: white; font-size: 0.8rem; padding: 8px 12px; border-radius: 6px; font-weight: bold; border: none; cursor: pointer; display: flex; align-items: center; gap: 5px; min-height: 36px; }
+        .btn-ws { background: #15803d; color: white; border: none; font-size: 0.75rem; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-weight: bold; display: inline-flex; align-items: center; gap: 4px; }
+        .btn-foto-corte { background: #475569; color: white; border: none; font-size: 0.75rem; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-weight: bold; display: inline-flex; align-items: center; gap: 4px; }
+        .btn-export { background: #0284c7; color: white; font-size: 0.75rem; padding: 6px 10px; border-radius: 6px; font-weight: bold; border: none; cursor: pointer; }
+        .btn-backup { background: #7c3aed; color: white; font-size: 0.75rem; padding: 6px 10px; border-radius: 6px; font-weight: bold; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+        .btn-restore { background: #b45309; color: white; font-size: 0.75rem; padding: 6px 10px; border-radius: 6px; font-weight: bold; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+        .btn-update { background: #0284c7; color: white; font-size: 0.75rem; padding: 6px 10px; border-radius: 6px; font-weight: bold; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+        
+        .btn-agenda-header { background: #3b82f6; color: white; font-size: 0.8rem; padding: 6px 12px; border-radius: 6px; font-weight: bold; border: none; cursor: pointer; display: flex; align-items: center; gap: 5px; }
 
         /* AVATAR Y BADGE DE GALERÍA */
         .avatar-container { position: relative; display: inline-block; }
-        .avatar-cliente { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); background: #0f172a; flex-shrink: 0; cursor: pointer; transition: transform 0.2s; touch-action: manipulation; }
-        .avatar-cliente:active { transform: scale(1.05); }
+        .avatar-cliente { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); background: #0f172a; flex-shrink: 0; cursor: pointer; transition: transform 0.2s; }
+        .avatar-cliente:hover { transform: scale(1.05); }
         .badge-cant-fotos { position: absolute; bottom: 2px; right: 0; background: var(--accent); color: white; font-size: 0.65rem; font-weight: bold; padding: 2px 5px; border-radius: 10px; border: 1px solid var(--bg); }
 
         /* BOTONES SELECCIONABLES EN EL FORMULARIO */
         .form-pago-selector, .form-frecuencia-selector { display: flex; gap: 4px; background: #0f172a; padding: 4px; border-radius: 8px; border: 1px solid var(--border); min-height: 46px; box-sizing: border-box; }
-        .btn-form-pago, .btn-form-frecuencia { flex: 1; font-size: 0.75rem; padding: 8px 2px; border: none; border-radius: 6px; background: transparent; color: var(--text-muted); cursor: pointer; font-weight: bold; text-align: center; transition: 0.2s; display: flex; align-items: center; justify-content: center; touch-action: manipulation; }
-
+        .btn-form-pago, .btn-form-frecuencia { flex: 1; font-size: 0.75rem; padding: 8px 2px; border: none; border-radius: 6px; background: transparent; color: var(--text-muted); cursor: pointer; font-weight: bold; text-align: center; transition: 0.2s; display: flex; align-items: center; justify-content: center; }
+        
         .btn-form-pago.active-pendiente { background: #7f1d1d; color: #fca5a5; }
         .btn-form-pago.active-abono { background: #713f12; color: #fde047; }
         .btn-form-pago.active-pagado { background: #14532d; color: #86efac; }
@@ -130,15 +107,15 @@
 
         /* CALENDARIO & VISTAS */
         .cal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .cal-header button { background: var(--border); padding: 10px 16px; }
+        .cal-header button { background: var(--border); padding: 6px 14px; }
         .cal-toggle-group { display: flex; background: #0f172a; border-radius: 8px; padding: 2px; border: 1px solid var(--border); }
-        .cal-toggle-btn { background: transparent; color: var(--text-muted); padding: 8px 12px; font-size: 0.75rem; border-radius: 6px; }
+        .cal-toggle-btn { background: transparent; color: var(--text-muted); padding: 4px 10px; font-size: 0.75rem; border-radius: 6px; }
         .cal-toggle-btn.active { background: var(--accent); color: white; }
 
         .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
         .cal-day-name { font-weight: bold; font-size: 0.8rem; color: var(--text-muted); padding: 4px 0; }
-        .cal-day { background: #0f172a; padding: 10px 0; border-radius: 6px; font-size: 0.85rem; position: relative; cursor: pointer; border: 1px solid transparent; touch-action: manipulation; min-height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .cal-day:active { border-color: var(--accent); }
+        .cal-day { background: #0f172a; padding: 10px 0; border-radius: 6px; font-size: 0.85rem; position: relative; cursor: pointer; border: 1px solid transparent; }
+        .cal-day:hover { border-color: var(--accent); }
         .cal-day.today { border: 2px solid var(--accent); font-weight: bold; color: var(--accent); }
         .cal-day.selected { background: var(--accent); color: white; }
         .dot-container { display: flex; justify-content: center; gap: 3px; margin-top: 4px; }
@@ -151,64 +128,54 @@
         .stat-box { background: #0f172a; padding: 12px; border-radius: 8px; border: 1px solid var(--border); }
         .stat-box span { display: block; font-size: 1.3rem; font-weight: bold; color: var(--text); }
         .stat-box label { font-size: 0.75rem; color: var(--text-muted); }
-
-        .item-card { background: #0f172a; border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+        
+        .item-card { background: #0f172a; border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
         .tag-group { display: flex; gap: 5px; margin-top: 5px; flex-wrap: wrap; }
-        .tag { font-size: 0.7rem; padding: 6px 8px; border-radius: 12px; font-weight: bold; border: none; touch-action: manipulation; }
-
+        .tag { font-size: 0.7rem; padding: 4px 8px; border-radius: 12px; font-weight: bold; border: none; }
+        
         .tag-agendado { background: #1e3a8a; color: #93c5fd; }
         .tag-walkin { background: #134e4a; color: #99f6e4; }
-
+        
         .btn-atendido { background: #14532d; color: #86efac; cursor: pointer; }
         .btn-por-atender { background: #7f1d1d; color: #fca5a5; cursor: pointer; }
-
+        
         .badge-pagado { background: #14532d; color: #86efac; cursor: pointer; }
         .badge-abono { background: #713f12; color: #fde047; cursor: pointer; }
         .badge-pendiente { background: #7f1d1d; color: #fca5a5; cursor: pointer; }
-
-        .btn-filter-reset { background: var(--border); color: var(--text); font-size: 0.75rem; padding: 8px 10px; border-radius: 6px; min-height: 36px; }
-
+        
+        .btn-filter-reset { background: var(--border); color: var(--text); font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; }
+        
         /* DIRECTORIO DE CLIENTES */
         .cliente-item { padding: 12px; background: #0f172a; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 10px; display: flex; gap: 12px; align-items: center; }
-        .cliente-info-box { flex: 1; min-width: 0; }
-        .cliente-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+        .cliente-info-box { flex: 1; }
+        .cliente-header { display: flex; justify-content: space-between; align-items: flex-start; }
         .cliente-info-extra { display: flex; gap: 10px; align-items: center; margin-top: 8px; font-size: 0.8rem; color: var(--text-muted); flex-wrap: wrap; }
-        .tag-alerta-seguimiento { background: #7f1d1d; color: #fca5a5; padding: 4px 8px; border-radius: 10px; font-weight: bold; font-size: 0.75rem; }
-        .tag-ok-seguimiento { background: #14532d; color: #86efac; padding: 4px 8px; border-radius: 10px; font-weight: bold; font-size: 0.75rem; }
-
-        .btn-icon-delete { background:none; border:none; color:#ef4444; cursor:pointer; font-size:1.1rem; padding: 8px; min-height: 36px; min-width: 36px; }
+        .tag-alerta-seguimiento { background: #7f1d1d; color: #fca5a5; padding: 2px 8px; border-radius: 10px; font-weight: bold; font-size: 0.75rem; }
+        .tag-ok-seguimiento { background: #14532d; color: #86efac; padding: 2px 8px; border-radius: 10px; font-weight: bold; font-size: 0.75rem; }
 
         /* MODALES */
         .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.85); display:none; justify-content:center; align-items:center; z-index:999; padding: 15px; box-sizing: border-box; }
         .modal-card { background: var(--card); border: 1px solid var(--border); width: 100%; max-width: 480px; border-radius: 12px; padding: 18px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); max-height: 85vh; display: flex; flex-direction: column; }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
         .modal-header h3 { margin:0; font-size: 1.1rem; }
-        .modal-close { background: none; border: none; color: var(--text-muted); font-size: 1.6rem; cursor: pointer; padding: 4px 8px; min-height: auto; }
-        .modal-close:active { color: white; }
-        .modal-body { overflow-y: auto; -webkit-overflow-scrolling: touch; flex: 1; margin-top: 10px; }
-        .modal-cliente-item { padding: 10px 12px; background: #0f172a; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; display: flex; justify-content: space-between; align-items: center; touch-action: manipulation; }
-        .modal-cliente-item:active { border-color: var(--accent); background: #1e293b; }
-
+        .modal-close { background: none; border: none; color: var(--text-muted); font-size: 1.4rem; cursor: pointer; padding: 0; }
+        .modal-close:hover { color: white; }
+        .modal-body { overflow-y: auto; flex: 1; margin-top: 10px; }
+        .modal-cliente-item { padding: 10px 12px; background: #0f172a; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; display: flex; justify-content: space-between; align-items: center; }
+        .modal-cliente-item:hover { border-color: var(--accent); background: #1e293b; }
+        
         /* GALERÍA DE FOTOS MULTIPLES */
         .galeria-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 10px; margin-top: 10px; }
         .galeria-item { position: relative; aspect-ratio: 1; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
         .galeria-item img { width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
-        .galeria-item .btn-del-foto { position: absolute; top: 2px; right: 2px; background: rgba(220,38,38,0.85); color: white; border: none; border-radius: 50%; width: 26px; height: 26px; min-height: auto; font-size: 0.8rem; cursor: pointer; display: flex; justify-content: center; align-items: center; padding: 0; }
-
-        .estado-db { font-size: 0.7rem; color: var(--text-muted); text-align: center; margin: -10px 0 15px 0; }
-        .estado-db.error { color: #fca5a5; }
-
-        @media (max-width: 380px) {
-            .btn-form-pago, .btn-form-frecuencia { font-size: 0.68rem; }
-        }
+        .galeria-item .btn-del-foto { position: absolute; top: 2px; right: 2px; background: rgba(220,38,38,0.85); color: white; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 0.7rem; cursor: pointer; display: flex; justify-content: center; align-items: center; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- INPUT OCULTO PARA DISPARAR CÁMARA DESDE CUALQUIER TARJETA -->
+    <!-- INPUTS OCULTOS PARA CAMARA Y RESTAURAR BACKUP -->
     <input type="file" id="inputFotoPostServicio" accept="image/*" capture="environment" style="display: none;" onchange="guardarFotoCorteDirecto(event)">
-    <!-- INPUT OCULTO PARA RESTAURAR RESPALDO JSON -->
     <input type="file" id="inputRestaurarBackup" accept="application/json" style="display: none;" onchange="restaurarBaseDeDatosJSON(event)">
 
     <!-- LOGO Y TITULO -->
@@ -224,18 +191,16 @@
         <p>Gestión de Citas y Clientes</p>
     </div>
 
-    <div class="estado-db" id="estadoDB">Iniciando base de datos local...</div>
-
     <!-- FORMULARIO DE REGISTRO DE CITA -->
     <div class="card">
         <h2>
             <span>Agendar o Registrar Cita</span>
             <button type="button" class="btn-agenda-header" onclick="abrirModalAgenda()">📖 Agenda</button>
         </h2>
-
+        
         <div class="form-group">
             <label>Nombre del Cliente</label>
-            <input type="text" id="nombre" list="clientesGuardados" placeholder="Escribe o selecciona un cliente..." oninput="autocompletarDatosCliente()" autocomplete="off">
+            <input type="text" id="nombre" list="clientesGuardados" placeholder="Escribe o selecciona un cliente..." oninput="autocompletarDatosCliente()">
             <datalist id="clientesGuardados"></datalist>
         </div>
 
@@ -269,7 +234,7 @@
         <div class="form-row">
             <div class="form-group">
                 <label>Precio Corte ($)</label>
-                <input type="number" inputmode="decimal" id="monto" placeholder="Ej. 15" oninput="calcularRestanteFormulario()">
+                <input type="number" id="monto" placeholder="Ej. 15" oninput="calcularRestanteFormulario()">
             </div>
             <div class="form-group">
                 <label>Estado de Pago</label>
@@ -283,7 +248,7 @@
 
         <div class="form-group" id="groupAbono" style="display: none;">
             <label>Monto Abonado ($)</label>
-            <input type="number" inputmode="decimal" id="montoAbonado" placeholder="Ej. 5" oninput="calcularRestanteFormulario()">
+            <input type="number" id="montoAbonado" placeholder="Ej. 5" oninput="calcularRestanteFormulario()">
             <small id="lblRestante" style="color: var(--text-muted); font-size: 0.8rem; display: block; margin-top: 4px;"></small>
         </div>
 
@@ -300,7 +265,7 @@
             <strong id="calTitulo">Semana Actual</strong>
             <button onclick="navegarCalendario(1)">▶</button>
         </div>
-
+        
         <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
             <div class="cal-toggle-group">
                 <button class="cal-toggle-btn active" id="btnVistaSemana" onclick="cambiarModoVista('semana')">Semanal</button>
@@ -348,6 +313,7 @@
         <h2>
             <span>👥 Base de Datos & Respaldo</span>
             <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                <button class="btn-update" onclick="actualizarAplicacion()">🔄 Actualizar App</button>
                 <button class="btn-backup" onclick="descargarBaseDeDatosJSON()">💾 Descargar Copia</button>
                 <button class="btn-restore" onclick="document.getElementById('inputRestaurarBackup').click()">♻️ Restaurar Copia</button>
                 <button class="btn-export" onclick="exportarClientesCSV()">📥 Exportar CSV</button>
@@ -364,7 +330,7 @@
             <h3>📖 Agenda de Clientes</h3>
             <button class="modal-close" onclick="cerrarModalAgenda()">✕</button>
         </div>
-        <input type="text" id="buscarClienteModal" placeholder="🔍 Buscar por nombre o teléfono..." oninput="filtrarClientesModal()" autocomplete="off">
+        <input type="text" id="buscarClienteModal" placeholder="🔍 Buscar por nombre o teléfono..." oninput="filtrarClientesModal()">
         <div class="modal-body" id="listaClientesModal"></div>
     </div>
 </div>
@@ -387,103 +353,9 @@
 </div>
 
 <script>
-    /* CAPA DE BASE DE DATOS (IndexedDB) */
-    const DB_NAME = 'BarberiaLitoDB';
-    const DB_VERSION = 1;
-    const STORE_REGISTROS = 'registros';
-    const STORE_CLIENTES = 'clientes';
-    let db = null;
-
-    function abrirDB() {
-        return new Promise((resolve, reject) => {
-            if (!('indexedDB' in window)) {
-                reject(new Error('Este navegador no soporta IndexedDB.'));
-                return;
-            }
-            const request = indexedDB.open(DB_NAME, DB_VERSION);
-            request.onupgradeneeded = (e) => {
-                const database = e.target.result;
-                if (!database.objectStoreNames.contains(STORE_REGISTROS)) {
-                    database.createObjectStore(STORE_REGISTROS, { keyPath: 'id' });
-                }
-                if (!database.objectStoreNames.contains(STORE_CLIENTES)) {
-                    database.createObjectStore(STORE_CLIENTES, { keyPath: 'id' });
-                }
-            };
-            request.onsuccess = (e) => { db = e.target.result; resolve(db); };
-            request.onerror = (e) => reject(e.target.error);
-        });
-    }
-
-    function dbGetAll(storeName) {
-        return new Promise((resolve, reject) => {
-            const tx = db.transaction(storeName, 'readonly');
-            const req = tx.objectStore(storeName).getAll();
-            req.onsuccess = () => resolve(req.result || []);
-            req.onerror = () => reject(req.error);
-        });
-    }
-
-    function dbClearAndBulkPut(storeName, arr) {
-        return new Promise((resolve, reject) => {
-            const tx = db.transaction(storeName, 'readwrite');
-            const store = tx.objectStore(storeName);
-            store.clear();
-            (arr || []).forEach(item => { if (item && item.id !== undefined) store.put(item); });
-            tx.oncomplete = () => resolve();
-            tx.onerror = () => reject(tx.error);
-        });
-    }
-
-    function marcarEstadoDB(mensaje, esError) {
-        const el = document.getElementById('estadoDB');
-        if (!el) return;
-        el.innerText = mensaje;
-        el.classList.toggle('error', !!esError);
-    }
-
-    let guardando = false;
-    let guardarPendiente = false;
-    async function guardar() {
-        render();
-        if (guardando) { guardarPendiente = true; return; }
-        guardando = true;
-        try {
-            await dbClearAndBulkPut(STORE_REGISTROS, registros);
-            await dbClearAndBulkPut(STORE_CLIENTES, clientesBD);
-            marcarEstadoDB('✓ Datos guardados en este dispositivo (IndexedDB)', false);
-        } catch (err) {
-            console.error('Error guardando en IndexedDB', err);
-            marcarEstadoDB('⚠️ No se pudo guardar. Verifica el almacenamiento del navegador.', true);
-        } finally {
-            guardando = false;
-            if (guardarPendiente) { guardarPendiente = false; guardar(); }
-        }
-    }
-
-    async function migrarDesdeLocalStorage() {
-        try {
-            const keyReg = 'barberia_registros_v4';
-            const keyCli = 'barberia_clientes_v4';
-            const oldReg = localStorage.getItem(keyReg);
-            const oldCli = localStorage.getItem(keyCli);
-            if (oldReg || oldCli) {
-                const regParsed = oldReg ? JSON.parse(oldReg) : [];
-                const cliParsed = oldCli ? JSON.parse(oldCli) : [];
-                await dbClearAndBulkPut(STORE_REGISTROS, regParsed);
-                await dbClearAndBulkPut(STORE_CLIENTES, cliParsed);
-                localStorage.removeItem(keyReg);
-                localStorage.removeItem(keyCli);
-            }
-        } catch (err) {
-            console.warn('No se pudo migrar datos antiguos de localStorage', err);
-        }
-    }
-
-    /* ESTADO DE LA APLICACIÓN */
-    let registros = [];
-    let clientesBD = [];
-
+    let registros = JSON.parse(localStorage.getItem('barberia_registros_v4')) || [];
+    let clientesBD = JSON.parse(localStorage.getItem('barberia_clientes_v4')) || [];
+    
     let fechaCalendario = new Date();
     let modoVista = 'semana';
     let fechaFiltroSeleccionada = null;
@@ -497,11 +369,66 @@
     function inicializarFechaHora() {
         const ahora = new Date();
         const pad = (n) => String(n).padStart(2, '0');
-
+        
         document.getElementById('fechaSeleccionada').value = `${ahora.getFullYear()}-${pad(ahora.getMonth() + 1)}-${pad(ahora.getDate())}`;
         document.getElementById('horaSeleccionada').value = `${pad(ahora.getHours())}:${pad(ahora.getMinutes())}`;
     }
 
+    function actualizarAplicacion() {
+        if (confirm("¿Deseas recargar la aplicación para aplicar las últimas modificaciones?")) {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                    for (let registration of registrations) {
+                        registration.unregister();
+                    }
+                });
+            }
+            window.location.reload(true);
+        }
+    }
+
+    function guardar() {
+        localStorage.setItem('barberia_registros_v4', JSON.stringify(registros));
+        localStorage.setItem('barberia_clientes_v4', JSON.stringify(clientesBD));
+        render();
+    }
+
+    /* RESTAURAR BASE DE DATOS JSON */
+    function restaurarBaseDeDatosJSON(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const datos = JSON.parse(e.target.result);
+                const nuevosClientes = Array.isArray(datos.clientes) ? datos.clientes : [];
+                const nuevosRegistros = Array.isArray(datos.registros) ? datos.registros : [];
+
+                if (nuevosClientes.length === 0 && nuevosRegistros.length === 0) {
+                    alert('El archivo no contiene datos reconocibles de un respaldo de Lito Barber Studio.');
+                    return;
+                }
+
+                if (!confirm(`Este respaldo contiene ${nuevosClientes.length} clientes y ${nuevosRegistros.length} registros.\n\n¿Deseas REEMPLAZAR todos los datos actuales por los de este archivo?`)) {
+                    return;
+                }
+
+                clientesBD = nuevosClientes;
+                registros = nuevosRegistros;
+                guardar();
+                alert('✅ Base de datos restaurada correctamente.');
+            } catch (err) {
+                console.error(err);
+                alert('❌ No se pudo leer el archivo. Asegúrate de que sea un archivo .json válido de respaldo.');
+            } final {
+                document.getElementById('inputRestaurarBackup').value = '';
+            }
+        };
+        reader.readAsText(file);
+    }
+
+    /* OBTENER ARRAY DE FOTOS DEL CLIENTE */
     function obtenerFotosCliente(clienteNombre) {
         if (!clienteNombre) return [];
         const cli = clientesBD.find(c => c && c.nombre && c.nombre.toLowerCase() === clienteNombre.toLowerCase());
@@ -516,10 +443,11 @@
         return fotosArr;
     }
 
+    /* VISOR GALERÍA MULTIFOTOS */
     function abrirGaleriaCliente(nombreCliente) {
         clienteNombreGaleriaActual = nombreCliente;
         const fotos = obtenerFotosCliente(nombreCliente);
-
+        
         document.getElementById('tituloGaleriaCliente').innerText = `🖼️ Galería: ${nombreCliente}`;
         const grid = document.getElementById('contenedorGaleriaGrid');
         grid.innerHTML = '';
@@ -565,6 +493,7 @@
         document.getElementById('modalGaleriaFotos').style.display = 'none';
     }
 
+    /* DESCARGAR BASE DE DATOS JSON */
     function descargarBaseDeDatosJSON() {
         if (registros.length === 0 && clientesBD.length === 0) {
             alert('Aún no hay datos para descargar.');
@@ -592,40 +521,7 @@
         URL.revokeObjectURL(url);
     }
 
-    function restaurarBaseDeDatosJSON(event) {
-        const file = event.target.files[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = async function(e) {
-            try {
-                const datos = JSON.parse(e.target.result);
-                const nuevosClientes = Array.isArray(datos.clientes) ? datos.clientes : [];
-                const nuevosRegistros = Array.isArray(datos.registros) ? datos.registros : [];
-
-                if (nuevosClientes.length === 0 && nuevosRegistros.length === 0) {
-                    alert('El archivo no contiene datos reconocibles de un respaldo de Lito Barber Studio.');
-                    return;
-                }
-
-                if (!confirm(`Este respaldo tiene ${nuevosClientes.length} clientes y ${nuevosRegistros.length} registros.\n\n¿Deseas REEMPLAZAR todos los datos actuales con este respaldo? Esta acción no se puede deshacer.`)) {
-                    return;
-                }
-
-                clientesBD = nuevosClientes;
-                registros = nuevosRegistros;
-                await guardar();
-                alert('✅ Respaldo restaurado correctamente.');
-            } catch (err) {
-                console.error(err);
-                alert('❌ No se pudo leer el archivo. Verifica que sea un respaldo válido de Lito Barber Studio (.json).');
-            } finally {
-                document.getElementById('inputRestaurarBackup').value = '';
-            }
-        };
-        reader.readAsText(file);
-    }
-
+    /* CAPTURA Y ASIGNACIÓN DE FOTO A LA GALERÍA DEL CLIENTE */
     function capturarFotoCorte(idRegistro) {
         idRegistroFotoActual = idRegistro;
         document.getElementById('inputFotoPostServicio').click();
@@ -667,10 +563,10 @@
                 const regIndex = registros.findIndex(r => r.id === idRegistroFotoActual);
                 if (regIndex >= 0) {
                     registros[regIndex].foto = fotoBase64;
-
+                    
                     const nombreCli = registros[regIndex].nombre;
                     const cliIndex = clientesBD.findIndex(c => c && c.nombre && c.nombre.toLowerCase() === nombreCli.toLowerCase());
-
+                    
                     if (cliIndex >= 0) {
                         let fotosExistentes = obtenerFotosCliente(nombreCli);
                         fotosExistentes.unshift(fotoBase64);
@@ -688,6 +584,7 @@
         reader.readAsDataURL(file);
     }
 
+    /* MODAL AGENDA */
     function abrirModalAgenda() {
         document.getElementById('modalAgenda').style.display = 'flex';
         document.getElementById('buscarClienteModal').value = '';
@@ -821,11 +718,11 @@
         const nombre = document.getElementById('nombre').value.trim();
         const telefono = document.getElementById('telefono').value.trim();
         const frecuenciaDias = frecuenciaSeleccionadaForm || 14;
-
+        
         const fechaVal = document.getElementById('fechaSeleccionada').value;
         const horaVal = document.getElementById('horaSeleccionada').value;
         const monto = parseFloat(document.getElementById('monto').value) || 0;
-
+        
         let abono = parseFloat(document.getElementById('montoAbonado').value) || 0;
         if (estadoPagoSeleccionadoForm === 'Pagado') abono = monto;
         if (estadoPagoSeleccionadoForm === 'Pendiente') abono = 0;
@@ -837,17 +734,17 @@
 
         const idxCliente = clientesBD.findIndex(c => c && c.nombre && c.nombre.toLowerCase() === nombre.toLowerCase());
         let fotoExistente = '';
-
+        
         if (idxCliente >= 0) {
             if (telefono) clientesBD[idxCliente].telefono = telefono;
             clientesBD[idxCliente].frecuenciaDias = frecuenciaDias;
             const fotosArr = obtenerFotosCliente(nombre);
             fotoExistente = fotosArr.length > 0 ? fotosArr[0] : '';
         } else {
-            clientesBD.push({
-                id: Date.now(),
-                nombre: nombre,
-                telefono: telefono,
+            clientesBD.push({ 
+                id: Date.now(), 
+                nombre: nombre, 
+                telefono: telefono, 
                 frecuenciaDias: frecuenciaDias,
                 fotos: []
             });
@@ -859,7 +756,7 @@
         }
 
         const nuevoRegistro = {
-            id: Date.now() + Math.floor(Math.random() * 1000),
+            id: Date.now(),
             nombre: nombre,
             telefono: telefono,
             foto: fotoExistente,
@@ -932,38 +829,11 @@
         }
     }
 
-    const CODIGO_PAIS_DEFECTO = '58';
-
-    function normalizarTelefono(telefono) {
-        let digitos = telefono ? telefono.replace(/[^0-9]/g, '') : '';
-        if (!digitos) return '';
-
-        if (digitos.startsWith('0') && digitos.length === 11) {
-            digitos = CODIGO_PAIS_DEFECTO + digitos.slice(1);
-        } else if (digitos.length === 10 && !digitos.startsWith(CODIGO_PAIS_DEFECTO)) {
-            digitos = CODIGO_PAIS_DEFECTO + digitos;
-        }
-        return digitos;
-    }
-
+    /* ENVIAR WHATSAPP DE FORMA SEGURA Y CORREGIDA */
     function abrirWhatsAppMensaje(telefono, texto) {
-        const telNormalizado = normalizarTelefono(telefono);
-
-        if (telefono && telNormalizado.length < 11) {
-            if (!confirm('⚠️ El número de teléfono parece incompleto, por lo que WhatsApp podría no abrir el chat correcto.\n\n¿Deseas intentarlo de todas formas?')) {
-                return;
-            }
-        }
-
-        let url = telNormalizado
-            ? `https://api.whatsapp.com/send?phone=${telNormalizado}&text=${encodeURIComponent(texto)}`
-            : `https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`;
-
-        const nuevaVentana = window.open(url, '_blank');
-
-        if (!nuevaVentana || nuevaVentana.closed || typeof nuevaVentana.closed === 'undefined') {
-            window.location.href = url;
-        }
+        let telLimpio = telefono ? telefono.replace(/[^0-9]/g, '') : '';
+        let url = telLimpio ? `https://wa.me/${telLimpio}?text=${encodeURIComponent(texto)}` : `https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`;
+        window.open(url, '_blank');
     }
 
     function enviarSeguimientoWhatsApp(nombreCliente, telefonoCliente, diasSinVenir) {
@@ -975,19 +845,13 @@
         abrirWhatsAppMensaje(telefonoCliente, texto);
     }
 
-    const DATOS_PAGO_MOVIL = {
-        cedula: '29.727.652',
-        banco: 'B.N.C. (0191)',
-        telefono: '0412-4055758'
-    };
-
     function enviarReciboWhatsApp(id) {
         const r = registros.find(item => item.id === id);
         if (!r) return;
 
         const fechaObj = new Date(r.fechaISO);
         const fechaFormateada = `${fechaObj.toLocaleDateString()} ${fechaObj.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
-
+        
         let detallePago = '';
         if (r.estadoPago === 'Pagado') {
             detallePago = `✅ *PAGO COMPLETO (100%)*`;
@@ -1005,18 +869,13 @@
         texto += `💰 *Precio Servicio:* $${r.monto.toFixed(2)}\n`;
         texto += `${detallePago}\n`;
         texto += `--------------------------------\n`;
-        texto += `📲 *DATOS DE PAGO MÓVIL*\n`;
-        texto += `🪪 C.I.: ${DATOS_PAGO_MOVIL.cedula}\n`;
-        texto += `🏦 Banco: ${DATOS_PAGO_MOVIL.banco}\n`;
-        texto += `📞 Teléfono: ${DATOS_PAGO_MOVIL.telefono}\n`;
-        texto += `--------------------------------\n`;
         texto += `¡Gracias por tu preferencia! 🙌`;
 
         abrirWhatsAppMensaje(r.telefono, texto);
     }
 
     function exportarResumenWhatsApp() {
-        let registrosFiltrados = fechaFiltroSeleccionada
+        let registrosFiltrados = fechaFiltroSeleccionada 
             ? registros.filter(r => r && r.fechaISO && new Date(r.fechaISO).toISOString().split('T')[0] === fechaFiltroSeleccionada)
             : registros;
 
@@ -1054,7 +913,7 @@
         clientesBD.forEach(c => {
             const ultReg = registros.filter(r => r && r.nombre && r.nombre.toLowerCase() === c.nombre.toLowerCase() && r.atendido)
                                     .sort((a,b) => new Date(b.fechaISO) - new Date(a.fechaISO))[0];
-
+            
             let ultimaFecha = ultReg ? new Date(ultReg.fechaISO).toLocaleDateString() : 'Sin registros atendidos';
             let diasSinVenir = ultReg ? Math.floor((new Date() - new Date(ultReg.fechaISO)) / (1000 * 60 * 60 * 24)) : 'N/A';
 
@@ -1137,7 +996,7 @@
             const año = fechaCalendario.getFullYear();
             const mes = fechaCalendario.getMonth();
             const nombresMeses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-
+            
             calTituloElem.innerText = `${nombresMeses[mes]} ${año}`;
 
             const primerDiaIndex = new Date(año, mes, 1).getDay();
@@ -1151,7 +1010,7 @@
             for (let d = 1; d <= ultimoDiaFecha; d++) {
                 const fechaActual = new Date(año, mes, d);
                 const fechaStrISO = fechaActual.toISOString().split('T')[0];
-
+                
                 const dayDiv = document.createElement('div');
                 dayDiv.className = 'cal-day';
                 if (fechaActual.toDateString() === hoyStr) dayDiv.classList.add('today');
@@ -1210,7 +1069,7 @@
 
             const registrosClienteAtendido = registros.filter(r => r && r.nombre && r.nombre.toLowerCase() === c.nombre.toLowerCase() && r.atendido)
                                                       .sort((a, b) => new Date(b.fechaISO) - new Date(a.fechaISO));
-
+            
             let textoUltimaVisita = 'Sin atenciones registradas';
             let diasSinVenir = null;
             let requiereSeguimiento = false;
@@ -1219,7 +1078,7 @@
             if (registrosClienteAtendido.length > 0) {
                 const ultFechaObj = new Date(registrosClienteAtendido[0].fechaISO);
                 textoUltimaVisita = ultFechaObj.toLocaleDateString();
-
+                
                 const diffTime = Math.abs(ahora - ultFechaObj);
                 diasSinVenir = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
@@ -1230,7 +1089,7 @@
 
             const item = document.createElement('div');
             item.className = 'cliente-item';
-
+            
             let htmlStatusSeguimiento = '';
             if (diasSinVenir !== null) {
                 if (requiereSeguimiento) {
@@ -1255,9 +1114,9 @@
                             <strong>${c.nombre}</strong> ${c.telefono ? `<small style="color:var(--text-muted);">(${c.telefono})</small>` : ''}<br>
                             <small style="color: var(--text-muted);">Frecuencia habitual: Cada ${freqDias} días | Última visita: ${textoUltimaVisita}</small>
                         </div>
-                        <button class="btn-icon-delete" onclick="eliminarCliente(${c.id})">✕</button>
+                        <button onclick="eliminarCliente(${c.id})" style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:0.85rem;">✕</button>
                     </div>
-
+                    
                     <div class="cliente-info-extra">
                         ${htmlStatusSeguimiento}
                         ${requiereSeguimiento ? `
@@ -1359,31 +1218,25 @@
                         </button>
                         ${badgePagoHTML}
                     </div>
-                    <button class="btn-icon-delete" onclick="eliminar(${r.id})" style="font-size:0.85rem;">Eliminar</button>
+                    <button onclick="eliminar(${r.id})" style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:0.85rem;">Eliminar</button>
                 </div>
             `;
             lista.appendChild(card);
         });
     }
 
-    /* INICIALIZACIÓN DE LA APP */
-    async function iniciarApp() {
-        try {
-            await abrirDB();
-            await migrarDesdeLocalStorage();
-            registros = await dbGetAll(STORE_REGISTROS);
-            clientesBD = await dbGetAll(STORE_CLIENTES);
-            registros.sort((a, b) => (b.id || 0) - (a.id || 0));
-            marcarEstadoDB('✓ Base de datos local lista (IndexedDB)', false);
-        } catch (err) {
-            console.error('No se pudo iniciar la base de datos', err);
-            marcarEstadoDB('⚠️ No se pudo iniciar la base de datos local en este navegador.', true);
-        }
-        inicializarFechaHora();
-        render();
+    // REGISTRO DEL SERVICE WORKER PARA HABILITAR PWA
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('Service Worker registrado con éxito', reg))
+                .catch(err => console.log('Error al registrar Service Worker', err));
+        });
     }
 
-    iniciarApp();
+    // Inicialización al cargar la página
+    inicializarFechaHora();
+    render();
 </script>
 </body>
 </html>
